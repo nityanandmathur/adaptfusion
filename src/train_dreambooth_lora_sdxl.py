@@ -694,9 +694,6 @@ def parse_args(input_args=None):
         if args.class_prompt is not None:
             warnings.warn("You need not use --class_prompt without --with_prior_preservation.")
 
-    with open(f"{args.output_dir}/args.json", "w") as f:
-        json.dump(vars(args), f, indent=4)
-
     return args
 
 
@@ -1067,6 +1064,8 @@ def main(args):
     if accelerator.is_main_process:
         if args.output_dir is not None:
             os.makedirs(args.output_dir, exist_ok=True)
+            with open(f"{args.output_dir}/args.json", "w") as f:
+                json.dump(vars(args), f, indent=4)
 
         if args.push_to_hub:
             repo_id = create_repo(

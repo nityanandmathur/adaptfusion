@@ -1,2 +1,5 @@
 models/
 wandb/
+results/
+results-*
+plots/
